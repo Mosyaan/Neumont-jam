@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Neumont_jam"
-run/main_scene="uid://bo8viffc67lxh"
+run/main_scene="uid://cc8cyv27ieple"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://assets/icon.svg"
 
@@ -22,6 +22,14 @@ window/size/viewport_height=768
 window/size/window_width_override=1360
 window/size/window_height_override=768
 window/stretch/mode="canvas_items"
+
+[audio]
+
+buses/default_bus_layout="res://assets/bus_layout.tres"
+
+[autoload]
+
+Global="*res://scenes/global.tscn"
 
 [dotnet]
 
