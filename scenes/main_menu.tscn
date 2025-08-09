@@ -1,0 +1,61 @@
+[gd_scene load_steps=5 format=3 uid="uid://dbymsl0jtn7ex"]
+
+[sub_resource type="Theme" id="Theme_vue75"]
+default_font_size = 38
+
+[sub_resource type="Theme" id="Theme_l6cm7"]
+default_font_size = 24
+
+[sub_resource type="GDScript" id="GDScript_l6cm7"]
+script/source = "extends Button
+
+func _pressed() -> void:
+	get_tree().change_scene_to_file('res://elements/World/world.tscn')
+"
+
+[sub_resource type="GDScript" id="GDScript_vue75"]
+script/source = "extends Button
+
+func _pressed() -> void:
+	get_tree().quit()
+"
+
+[node name="MainMenu" type="Node2D"]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 392.0
+offset_top = 176.369
+offset_right = 753.0
+offset_bottom = 233.369
+rotation = -0.13439
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = SubResource("Theme_vue75")
+text = "Hellow!!!"
+horizontal_alignment = 1
+
+[node name="start_button" type="Button" parent="."]
+offset_left = 456.0
+offset_top = 288.369
+offset_right = 696.0
+offset_bottom = 330.369
+theme = SubResource("Theme_l6cm7")
+text = "Begin journey"
+script = SubResource("GDScript_l6cm7")
+
+[node name="settings_button" type="Button" parent="."]
+offset_left = 456.0
+offset_top = 352.369
+offset_right = 696.0
+offset_bottom = 394.369
+theme = SubResource("Theme_l6cm7")
+text = "Settings"
+
+[node name="leave_button" type="Button" parent="."]
+offset_left = 456.0
+offset_top = 416.369
+offset_right = 696.0
+offset_bottom = 458.369
+theme = SubResource("Theme_l6cm7")
+text = "Leave"
+script = SubResource("GDScript_vue75")
