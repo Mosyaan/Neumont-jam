@@ -15,14 +15,6 @@ run/main_scene="uid://cc8cyv27ieple"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://assets/icon.svg"
 
-[display]
-
-window/size/viewport_width=1360
-window/size/viewport_height=768
-window/size/window_width_override=1360
-window/size/window_height_override=768
-window/stretch/mode="canvas_items"
-
 [audio]
 
 buses/default_bus_layout="res://assets/bus_layout.tres"
@@ -30,6 +22,14 @@ buses/default_bus_layout="res://assets/bus_layout.tres"
 [autoload]
 
 Global="*res://scenes/global.tscn"
+
+[display]
+
+window/size/viewport_width=1360
+window/size/viewport_height=768
+window/size/window_width_override=1360
+window/size/window_height_override=768
+window/stretch/mode="canvas_items"
 
 [dotnet]
 
