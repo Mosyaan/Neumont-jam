@@ -1,11 +1,10 @@
 extends Node2D
 
-@onready var polygon_2d = $StaticBody2D/CollisionPolygon2D/Polygon2D
-@onready var collision_polygon_2d = $StaticBody2D/CollisionPolygon2D
-
 func _ready() -> void:
-	polygon_2d.polygon = collision_polygon_2d.polygon
+	pass
 
+func _process(delta: float) -> void:
+	pass
 
 
 """
@@ -13,7 +12,5 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 """
