@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://dsnw7vsocm3b4"]
+
+[ext_resource type="AudioStream" uid="uid://y3q6vmn3xf47" path="res://assets/sounds/calm_ambient.mp3" id="1_jhqup"]
+
+[sub_resource type="GDScript" id="GDScript_jhqup"]
+script/source = "extends Control
+
+var prev_scene: String
+"
+
+[node name="Global" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_jhqup")
+
+[node name="CalmAmbient" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_jhqup")
