@@ -1,8 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://d3y7fvm78w3ji"]
+[gd_scene load_steps=23 format=3 uid="uid://d3y7fvm78w3ji"]
 
 [ext_resource type="Script" uid="uid://cm7ui3f7lk34f" path="res://elements/Player/player.gd" id="1_34354"]
 [ext_resource type="Texture2D" uid="uid://ctftrub7ixqxu" path="res://assets/Wizard/Idle.png" id="2_34354"]
+[ext_resource type="Theme" uid="uid://c7witwf6ohmr7" path="res://assets/theme.tres" id="2_uuo3k"]
 [ext_resource type="Texture2D" uid="uid://e2vfn6tua2e0" path="res://assets/Wizard/Walk.png" id="3_66ndd"]
+[ext_resource type="AudioStream" uid="uid://bmk6xsj1nsi4h" path="res://assets/sounds/hit_sound.mp3" id="5_mrdvp"]
+[ext_resource type="AudioStream" uid="uid://cv4lsn8fnimqo" path="res://assets/sounds/die_sound.mp3" id="6_5oy5x"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_66ndd"]
 atlas = ExtResource("2_34354")
@@ -110,13 +113,23 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_66ndd"]
 radius = 16.0
-height = 64.0
+height = 32.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nlv5c"]
+radius = 72.4431
 
 [node name="Player" type="CharacterBody2D"]
-collision_layer = 0
-collision_mask = 0
 motion_mode = 1
 script = ExtResource("1_34354")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+offset_left = -40.0
+offset_top = -96.0
+offset_right = 40.0
+offset_bottom = -92.0
+theme = ExtResource("2_uuo3k")
+show_percentage = false
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
@@ -127,5 +140,17 @@ autoplay = "Idle"
 frame_progress = 0.588945
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -32)
+position = Vector2(0, -16)
 shape = SubResource("CapsuleShape2D_66ndd")
+
+[node name="HitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_mrdvp")
+
+[node name="DieSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_5oy5x")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -16)
+shape = SubResource("CircleShape2D_nlv5c")

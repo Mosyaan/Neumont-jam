@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bo8viffc67lxh"]
+[gd_scene load_steps=8 format=3 uid="uid://bo8viffc67lxh"]
 
 [ext_resource type="PackedScene" uid="uid://d3y7fvm78w3ji" path="res://elements/Player/player.tscn" id="1_hs6ky"]
 [ext_resource type="Script" uid="uid://jdrkambkm2sm" path="res://elements/World/world.gd" id="1_sfrcb"]
@@ -9,6 +9,13 @@ size = Vector2(6, 768)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ixfnx"]
 size = Vector2(1360, 2)
+
+[sub_resource type="GDScript" id="GDScript_mkgc3"]
+script/source = "extends Sprite2D
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5wi5m"]
+size = Vector2(160, 160)
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_sfrcb")
@@ -56,5 +63,14 @@ position = Vector2(680, 768)
 shape = SubResource("RectangleShape2D_ixfnx")
 
 [node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(272, 80)
+position = Vector2(528, 152)
 texture = ExtResource("3_mkgc3")
+script = SubResource("GDScript_mkgc3")
+
+[node name="Area2D" type="Area2D" parent="Icon"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Icon/Area2D"]
+shape = SubResource("RectangleShape2D_5wi5m")
+
+[connection signal="body_entered" from="Icon/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Icon/Area2D" to="." method="_on_area_2d_body_exited"]
