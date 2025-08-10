@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://shtjh6qvegxb"]
+
+[ext_resource type="Script" uid="uid://vqtm386ccklf" path="res://elements/living_entity.gd" id="1_mdhsg"]
+
+[node name="LivingEntity" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_mdhsg")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+offset_left = -64.0
+offset_right = 64.0
+offset_bottom = 8.0
+show_percentage = false

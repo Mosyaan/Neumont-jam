@@ -1,11 +1,43 @@
-[gd_scene load_steps=23 format=3 uid="uid://d3y7fvm78w3ji"]
+[gd_scene load_steps=22 format=3 uid="uid://d3y7fvm78w3ji"]
 
-[ext_resource type="Script" uid="uid://cm7ui3f7lk34f" path="res://elements/Player/player.gd" id="1_34354"]
 [ext_resource type="Texture2D" uid="uid://ctftrub7ixqxu" path="res://assets/Wizard/Idle.png" id="2_34354"]
-[ext_resource type="Theme" uid="uid://c7witwf6ohmr7" path="res://assets/theme.tres" id="2_uuo3k"]
 [ext_resource type="Texture2D" uid="uid://e2vfn6tua2e0" path="res://assets/Wizard/Walk.png" id="3_66ndd"]
 [ext_resource type="AudioStream" uid="uid://bmk6xsj1nsi4h" path="res://assets/sounds/hit_sound.mp3" id="5_mrdvp"]
 [ext_resource type="AudioStream" uid="uid://cv4lsn8fnimqo" path="res://assets/sounds/die_sound.mp3" id="6_5oy5x"]
+
+[sub_resource type="GDScript" id="GDScript_o7pxy"]
+script/source = "extends LivingEntity
+
+@export
+var movement_speed = 400
+
+func _process(delta: float) -> void:
+	%HealthBar.max_value = max_health
+	%HealthBar.value = health
+
+func _physics_process(delta: float) -> void:
+	var vector = Vector2.ZERO
+	vector.x = Input.get_axis(\"move_left\", \"move_right\")
+	vector.y = Input.get_axis(\"move_up\", \"move_down\")
+	vector = vector.normalized() * movement_speed
+	
+	handle_movement(vector)
+
+func handle_animations(vector: Vector2):
+	%sprite.flip_h = vector.x < 0
+	if abs(vector.x) > 0:
+		if %sprite.animation != \"Walking\": %sprite.animation = \"Walking\"
+	else:
+		if %sprite.animation != \"Idle\": %sprite.animation = \"Idle\"
+
+
+func _on_peform_movement(vector: Vector2) -> void:
+	handle_animations(vector)
+
+
+func _on_recieve_damage() -> void:
+	%Sounds/hit.play()
+"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_66ndd"]
 atlas = ExtResource("2_34354")
@@ -111,25 +143,17 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_66ndd"]
-radius = 16.0
-height = 32.0
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_nlv5c"]
 radius = 72.4431
 
-[node name="Player" type="CharacterBody2D"]
-motion_mode = 1
-script = ExtResource("1_34354")
+[sub_resource type="CircleShape2D" id="CircleShape2D_o7pxy"]
+radius = 16.0
 
-[node name="ProgressBar" type="ProgressBar" parent="."]
-unique_name_in_owner = true
-offset_left = -40.0
-offset_top = -96.0
-offset_right = 40.0
-offset_bottom = -92.0
-theme = ExtResource("2_uuo3k")
-show_percentage = false
+[node name="Player" type="CharacterBody2D"]
+script = SubResource("GDScript_o7pxy")
+collision_center = Vector2(0, -16)
+healthbar_top = 96
+metadata/_custom_type_script = "uid://vqtm386ccklf"
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
@@ -138,19 +162,36 @@ sprite_frames = SubResource("SpriteFrames_xrjx1")
 animation = &"Idle"
 autoplay = "Idle"
 frame_progress = 0.588945
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -16)
-shape = SubResource("CapsuleShape2D_66ndd")
-
-[node name="HitSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_mrdvp")
-
-[node name="DieSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_5oy5x")
+speed_scale = 0.8
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, -16)
 shape = SubResource("CircleShape2D_nlv5c")
+
+[node name="Sounds" type="Node" parent="."]
+unique_name_in_owner = true
+
+[node name="hit" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("5_mrdvp")
+
+[node name="die" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("6_5oy5x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -16)
+shape = SubResource("CircleShape2D_o7pxy")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+offset_left = -56.0
+offset_top = -104.0
+offset_right = 56.0
+offset_bottom = -96.0
+show_percentage = false
+
+[connection signal="health_below_zero" from="." to="." method="_on_health_below_zero"]
+[connection signal="peform_movement" from="." to="." method="_on_peform_movement"]
+[connection signal="recieve_damage" from="." to="." method="_on_recieve_damage"]
