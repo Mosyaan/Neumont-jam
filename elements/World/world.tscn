@@ -3,16 +3,13 @@
 [ext_resource type="PackedScene" uid="uid://d3y7fvm78w3ji" path="res://elements/Player/player.tscn" id="1_hs6ky"]
 [ext_resource type="Script" uid="uid://jdrkambkm2sm" path="res://elements/World/world.gd" id="1_sfrcb"]
 [ext_resource type="Texture2D" uid="uid://yk0spja1m0x6" path="res://assets/icon.svg" id="3_mkgc3"]
+[ext_resource type="PackedScene" uid="uid://shtjh6qvegxb" path="res://elements/living_entity.tscn" id="4_ixfnx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mkgc3"]
 size = Vector2(6, 768)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ixfnx"]
 size = Vector2(1360, 2)
-
-[sub_resource type="GDScript" id="GDScript_mkgc3"]
-script/source = "extends Sprite2D
-"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5wi5m"]
 size = Vector2(160, 160)
@@ -62,15 +59,17 @@ shape = SubResource("RectangleShape2D_ixfnx")
 position = Vector2(680, 768)
 shape = SubResource("RectangleShape2D_ixfnx")
 
-[node name="Icon" type="Sprite2D" parent="."]
+[node name="LivingEntity" parent="." instance=ExtResource("4_ixfnx")]
+unique_name_in_owner = true
 position = Vector2(528, 152)
+
+[node name="Icon" type="Sprite2D" parent="LivingEntity"]
 texture = ExtResource("3_mkgc3")
-script = SubResource("GDScript_mkgc3")
 
-[node name="Area2D" type="Area2D" parent="Icon"]
+[node name="Area2D" type="Area2D" parent="LivingEntity/Icon"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Icon/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LivingEntity/Icon/Area2D"]
 shape = SubResource("RectangleShape2D_5wi5m")
 
-[connection signal="body_entered" from="Icon/Area2D" to="." method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="Icon/Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="LivingEntity/Icon/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="LivingEntity/Icon/Area2D" to="." method="_on_area_2d_body_exited"]

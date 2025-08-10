@@ -1,13 +1,15 @@
 extends Node2D
 
-var cooldown_max = 0.5
+var cooldown_max = 2
 var time_past = 0
 var knonkback_force = 200
 
 func _ready() -> void:
 	pass
+
+
 	
-var bodies = {}
+var bodies: Dictionary[int, Dictionary] = {}
 
 func _process(delta: float) -> void:
 	for bodyId in bodies:
@@ -15,24 +17,30 @@ func _process(delta: float) -> void:
 		if body.cooldown > 0: 
 			body.cooldown -= delta
 		
-		if body.cooldown <= 0:
-			deal_damage(5, bodyId)
+		if body.cooldown <= 0 and body.entered:
+			if body.entered:
+				deal_damage(5, bodyId)
+			else:
+				bodies.erase(bodyId)
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if "hit" in body:
+	if body is LivingEntity:
 		var bodyId = body.get_instance_id()
-		bodies[bodyId] = {
-			cooldown = 0,
-			node = body
-		}
+		
+		if bodyId in bodies:
+			bodies[body.get_instance_id()].entered = true
+		else:
+			bodies[bodyId] = {
+				cooldown = 0,
+				entered = true,
+				node = body
+			}
 
 func deal_damage(damage: float, bodyId: int) -> void:
-	var body = bodies[bodyId];
-	body.node.hit(damage)
+	var body = bodies[bodyId]
+	print_debug(%LivingEntity.get_collision_center())
+	(body.node as LivingEntity).hit_by_entity(5, %LivingEntity)
 	body.cooldown = cooldown_max
-	if "acelerate" in body.node:
-		var force = $Area2D.global_position.direction_to(body.node.global_position)
-		body.node.acelerate(force * knonkback_force)
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
-	bodies.erase(body.get_instance_id())
+	bodies[body.get_instance_id()].entered = false
