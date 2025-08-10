@@ -40,6 +40,7 @@ func _physics_process(delta: float):
 func handle_movement(vec: Vector2, delta: float):
 	velocity.x = move_toward(velocity.x, SPEED * vec.x, ACCELERATION * delta)
 	velocity.y = move_toward(velocity.y, SPEED * vec.y, ACCELERATION * delta)
+	
 
 
 func handle_movement_animations(vec: Vector2):
@@ -89,3 +90,8 @@ func _on_attack_body_entered(body):
 	if body.is_in_group("enemies"):
 		if body.has_method("take_damage"):
 			body.take_damage(10)
+			if last_direction == "right":
+				body.get_node("AnimatedSprite2D").flip_h = get_node("sprite").flip_h == false
+			else:
+				body.get_node("AnimatedSprite2D").flip_h = get_node("sprite").flip_h == true
+			

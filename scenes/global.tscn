@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dsnw7vsocm3b4"]
+[gd_scene load_steps=4 format=3 uid="uid://dsnw7vsocm3b4"]
 
 [ext_resource type="AudioStream" uid="uid://y3q6vmn3xf47" path="res://assets/sounds/calm_ambient.mp3" id="1_jhqup"]
+[ext_resource type="AudioStream" uid="uid://c8522cdddqgvc" path="res://assets/sounds/game_ambient_.mp3" id="2_nmxvb"]
 
 [sub_resource type="GDScript" id="GDScript_jhqup"]
 script/source = "extends Control
@@ -19,3 +20,7 @@ script = SubResource("GDScript_jhqup")
 
 [node name="CalmAmbient" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_jhqup")
+
+[node name="GameAmbient" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_nmxvb")
+volume_db = -20.0

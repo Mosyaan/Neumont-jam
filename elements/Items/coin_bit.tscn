@@ -1,10 +1,16 @@
-[gd_scene load_steps=13 format=3 uid="uid://w0jbgldbegu4"]
+[gd_scene load_steps=18 format=3 uid="uid://w0jbgldbegu4"]
 
 [ext_resource type="Script" uid="uid://cos78yloexc5t" path="res://elements/Items/Bit.gd" id="1_wivpf"]
 [ext_resource type="Texture2D" uid="uid://bm5831c2qfdw0" path="res://assets/tileset/Art/Props/Animation/Campfire.png" id="2_ulffq"]
+[ext_resource type="Texture2D" uid="uid://6cllcdplwyuk" path="res://assets/tileset/Art/Props/Animation/Flowers_Red.png" id="3_thkra"]
+[ext_resource type="Texture2D" uid="uid://cqxpcouvvx51r" path="res://assets/tileset/Art/Props/Animation/Flowers_White.png" id="4_5dink"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_thkra"]
 atlas = ExtResource("2_ulffq")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5y8xd"]
+atlas = ExtResource("3_thkra")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5dink"]
@@ -13,6 +19,10 @@ region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jr1qq"]
 atlas = ExtResource("2_ulffq")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fhh56"]
+atlas = ExtResource("3_thkra")
 region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wx0sr"]
@@ -35,6 +45,10 @@ region = Rect2(192, 0, 32, 32)
 atlas = ExtResource("2_ulffq")
 region = Rect2(224, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_mgtda"]
+atlas = ExtResource("4_5dink")
+region = Rect2(384, 0, 32, 32)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_ulffq"]
 animations = [{
 "frames": [{
@@ -42,10 +56,16 @@ animations = [{
 "texture": SubResource("AtlasTexture_thkra")
 }, {
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_5y8xd")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_5dink")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jr1qq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fhh56")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wx0sr")
@@ -61,6 +81,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_fnfjm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mgtda")
 }],
 "loop": true,
 "name": &"spin",

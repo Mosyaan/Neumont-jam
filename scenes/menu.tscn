@@ -5,10 +5,12 @@
 [sub_resource type="GDScript" id="GDScript_y2bao"]
 script/source = "extends Control
 
-var backgroundMusic: AudioStreamPlayer = Global.get_node(\"CalmAmbient\");
+var backgroundMusic: AudioStreamPlayer = Global.get_node(\"CalmAmbient\")
+var gameMusic: AudioStreamPlayer = Global.get_node(\"GameAmbient\")
 
 func _process(delta: float) -> void:
 	if !backgroundMusic.playing:
+		gameMusic.stop()
 		backgroundMusic.play()
 "
 

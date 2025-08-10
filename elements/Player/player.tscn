@@ -1,6 +1,6 @@
 [gd_scene load_steps=64 format=3 uid="uid://d3y7fvm78w3ji"]
 
-[ext_resource type="Script" uid="uid://cm7ui3f7lk34f" path="res://elements/Player/player.gd" id="1_34354"]
+[ext_resource type="Script" uid="uid://chr0k5ryynl38" path="res://elements/Player/player.gd" id="1_34354"]
 [ext_resource type="Texture2D" uid="uid://dop5cwrjjld7q" path="res://assets/tileset/Art/Characters/Main Character/Character_Slash.png" id="2_o7pxy"]
 [ext_resource type="Texture2D" uid="uid://c17fa7b8n86bg" path="res://assets/tileset/Art/Characters/Main Character/Character_Idle.png" id="3_crmp4"]
 [ext_resource type="Texture2D" uid="uid://bm43kin1lpjat" path="res://assets/tileset/Art/Characters/Main Character/Character_Walk.png" id="4_uuo3k"]
@@ -460,9 +460,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_66ndd"]
-radius = 9.0
-height = 32.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_crmp4"]
+radius = 6.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o7pxy"]
 radius = 23.0
@@ -482,15 +481,20 @@ animation = &"Attack_up"
 autoplay = "Idle_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -16)
-shape = SubResource("CapsuleShape2D_66ndd")
+position = Vector2(0, -3)
+shape = SubResource("CircleShape2D_crmp4")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2.5, 2.5)
+limit_left = 0
+limit_top = -100
+limit_right = 635
+limit_bottom = 530
 position_smoothing_enabled = true
 position_smoothing_speed = 7.0
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 collision_layer = 8
 collision_mask = 2
 

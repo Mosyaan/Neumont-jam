@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var health = 50
+var health = 30
 
 
 func _ready() -> void:
@@ -8,6 +8,7 @@ func _ready() -> void:
 
 
 func take_damage(amount):
+	$AnimatedSprite2D.play("took_damage")
 	health -= amount
 	print("Enemy took some damage! HP left: ", health)
 	if health <= 0:

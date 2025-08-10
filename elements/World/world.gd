@@ -1,5 +1,8 @@
 extends Node2D
 
+var backgroundMusic: AudioStreamPlayer = Global.get_node("CalmAmbient")
+var gameMusic: AudioStreamPlayer = Global.get_node("GameAmbient")
+
 var cooldown_max = 2
 var time_past = 0
 var knonkback_force = 200
@@ -12,6 +15,10 @@ func _ready() -> void:
 var bodies: Dictionary[int, Dictionary] = {}
 
 func _process(delta: float) -> void:
+	if !gameMusic.playing:
+		backgroundMusic.stop()
+		gameMusic.play()
+	
 	for bodyId in bodies:
 		var body = bodies[bodyId]
 		if body.cooldown > 0: 
@@ -22,6 +29,7 @@ func _process(delta: float) -> void:
 				deal_damage(5, bodyId)
 			else:
 				bodies.erase(bodyId)
+
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is LivingEntity:
@@ -44,3 +52,8 @@ func deal_damage(damage: float, bodyId: int) -> void:
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	bodies[body.get_instance_id()].entered = false
+
+
+func _input(event: InputEvent):
+	if Input.is_action_pressed("ui_cancel"):
+		get_tree().change_scene_to_file("res://scenes/menu.tscn")
