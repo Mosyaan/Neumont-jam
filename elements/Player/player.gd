@@ -16,6 +16,7 @@ var bits := 0
 
 
 func _ready():
+	add_to_group("player")
 	attack_area.connect("body_entered", Callable(self, "_on_attack_body_entered"))
 	attack_area.monitoring = false
 

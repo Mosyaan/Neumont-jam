@@ -22,6 +22,7 @@ buses/default_bus_layout="res://assets/bus_layout.tres"
 [autoload]
 
 Global="*res://scenes/global.tscn"
+ScoreManager="*res://elements/Items/ScoreManager.gd"
 
 [display]
 
