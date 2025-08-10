@@ -1,9 +1,10 @@
-[gd_scene load_steps=64 format=3 uid="uid://d3y7fvm78w3ji"]
+[gd_scene load_steps=65 format=3 uid="uid://d3y7fvm78w3ji"]
 
 [ext_resource type="Script" uid="uid://cm7ui3f7lk34f" path="res://elements/Player/player.gd" id="1_34354"]
 [ext_resource type="Texture2D" uid="uid://dop5cwrjjld7q" path="res://assets/tileset/Art/Characters/Main Character/Character_Slash.png" id="2_o7pxy"]
 [ext_resource type="Texture2D" uid="uid://c17fa7b8n86bg" path="res://assets/tileset/Art/Characters/Main Character/Character_Idle.png" id="3_crmp4"]
 [ext_resource type="Texture2D" uid="uid://bm43kin1lpjat" path="res://assets/tileset/Art/Characters/Main Character/Character_Walk.png" id="4_uuo3k"]
+[ext_resource type="Script" uid="uid://bh6otjqi835u2" path="res://elements/Player/debug_console.gd" id="5_crmp4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_crmp4"]
 atlas = ExtResource("2_o7pxy")
@@ -497,3 +498,38 @@ collision_mask = 2
 [node name="AttackArea" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, -16)
 shape = SubResource("CircleShape2D_o7pxy")
+
+[node name="DebugConsole" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("5_crmp4")
+
+[node name="Panel" type="Panel" parent="DebugConsole"]
+layout_mode = 0
+offset_left = -127.0
+offset_top = -72.0
+offset_right = -49.0
+offset_bottom = -32.0
+scale = Vector2(1.28141, 1.71295)
+
+[node name="LineEdit" type="LineEdit" parent="DebugConsole/Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 31.0
+grow_horizontal = 2
+scale = Vector2(1.00145, 0.276013)
+
+[node name="TextEdit" type="TextEdit" parent="DebugConsole/Panel"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -4.0
+offset_right = 8.0
+offset_bottom = 4.0
+grow_vertical = 2
+scale = Vector2(9.61155, 2.78178)
